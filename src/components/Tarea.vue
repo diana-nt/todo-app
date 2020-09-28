@@ -11,11 +11,15 @@ export default {
       "tarea"
   ],
   methods: {
-    markC
+    markComplete(){
+      this.tarea.completed = !this.tarea.completed
+    }
   }
 }
 </script>
 
 <style scoped>
-
+  .completed {
+    text-decoration: line-through;
+  }
 </style>
