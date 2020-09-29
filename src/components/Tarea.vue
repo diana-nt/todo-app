@@ -1,6 +1,7 @@
 <template>
   <div v-bind:class="{ 'completed': tarea.completed }">
       <p @click="markComplete">{{ tarea.title }}</p>
+    <button @click="$emit('delete-tarea', tarea.id)">Eliminar</button>
   </div>
 </template>
 

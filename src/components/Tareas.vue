@@ -3,7 +3,7 @@
     <h2>Mi lista de tareas</h2>
     <ul>
       <li v-bind:key="tarea.id" v-for="tarea in tareas">
-        <Tarea v-bind:tarea="tarea" />
+        <Tarea v-bind:tarea="tarea" @delete-tarea="$emit('delete-tarea', tarea.id)"/>
       </li>
     </ul>
   </div>

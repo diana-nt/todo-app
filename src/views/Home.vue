@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <tareas v-bind:tareas="tareas"></tareas>
+    <tareas v-bind:tareas="tareas" @delete-tarea="deleteTarea"></tareas>
     <addTarea v-on:add-tarea="addTarea" />
   </div>
 </template>
@@ -51,6 +51,9 @@ export default {
     addTarea(nuevaTarea) {
       console.log(nuevaTarea)
       this.tareas = [...this.tareas, nuevaTarea];
+    },
+    deleteTarea(tareaId){
+      this.tareas = this.tareas.filter(tarea => tarea.id !== tareaId);
     }
   }
 }
