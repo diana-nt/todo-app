@@ -21,7 +21,8 @@ export default {
       const nuevaTarea = {
         id: uuidv4(),
         title: this.title,
-        completed: false
+        completed: false,
+        created_at: new Date()
       }
 
       this.$emit('add-tarea', nuevaTarea);

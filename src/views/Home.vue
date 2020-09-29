@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">
-      {{ tab }}
+      {{ tab | capitalizar }}
     </button>
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <addTarea @add-tarea="addTarea" />
+    <button @click="ordenarTareas">Ordenar</button>
   </div>
 </template>
 
@@ -12,7 +13,6 @@
 // @ is an alias to /src
 import Tareas from "@/components/Tareas";
 import AddTarea from "@/components/AddTarea";
-
 
 export default {
   name: 'Home',
@@ -28,27 +28,32 @@ export default {
         {
           id: 1,
           title: 'Aprender Vue',
-          completed: false
+          completed: false,
+          created_at: new Date('2017-06-01')
         },
         {
           id: 2,
           title: 'Lavar coche',
-          completed: false
+          completed: false,
+          created_at: new Date('2018-04-23')
         },
         {
           id: 3,
           title: 'Pasar la aspiradora',
-          completed: false
+          completed: false,
+          created_at: new Date('2019-11-30')
         },
         {
           id: 4,
           title: 'Hacer trabajo de clase',
-          completed: false
+          completed: false,
+          created_at: new Date('2019-02-10')
         },
         {
           id: 5,
           title: 'Comprar impresora',
-          completed: false
+          completed: false,
+          created_at: new Date('2004-08-13')
         }
       ]
     }
@@ -72,6 +77,9 @@ export default {
     },
     deleteTarea(tareaId){
       this.tareas = this.tareas.filter(tarea => tarea.id !== tareaId);
+    },
+    ordenarTareas(){
+      return this.tareas.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
     }
   },
   computed:{
@@ -80,6 +88,11 @@ export default {
     },
     tareasPendientes(){
       return this.tareas.filter(tarea => tarea.completed === false);
+    }
+  },
+  filters: {
+    capitalizar(contenido) {
+      return contenido.substring(0, 1).toUpperCase() + contenido.substring(1, contenido.length);
     }
   }
 }
