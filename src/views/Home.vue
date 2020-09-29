@@ -1,7 +1,12 @@
 <template>
   <div class="home">
-    <tareas v-bind:tareas="tareas" @delete-tarea="deleteTarea"></tareas>
-    <addTarea v-on:add-tarea="addTarea" />
+    <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">
+      {{ tab }}
+    </button>
+<!--    <p>{{actual}}</p>-->
+<!--    <component :is="tareasSeleccionadas" :tareas="tareas"></component>-->
+    <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
+    <addTarea @add-tarea="addTarea" />
   </div>
 </template>
 
@@ -9,6 +14,7 @@
 // @ is an alias to /src
 import Tareas from "@/components/Tareas";
 import AddTarea from "@/components/AddTarea";
+
 
 export default {
   name: 'Home',
@@ -18,6 +24,8 @@ export default {
   },
   data() {
     return {
+      tabs: ['todas', 'finalizadas','pendientes' ],
+      actual: 'todas',
       tareas: [
         {
           id: 1,
@@ -44,16 +52,31 @@ export default {
           title: 'Comprar impresora',
           completed: false
         }
-      ],
+      ]
     }
   },
   methods: {
+    changeTab(tab){
+      this.actual = tab;
+    },
+    tareasMostradas(){
+
+      if (this.actual === 'finalizadas'){
+        return this.tareasFinalizadas;
+      }
+      return this.tareas;
+    },
     addTarea(nuevaTarea) {
       console.log(nuevaTarea)
       this.tareas = [...this.tareas, nuevaTarea];
     },
     deleteTarea(tareaId){
       this.tareas = this.tareas.filter(tarea => tarea.id !== tareaId);
+    }
+  },
+  computed:{
+    tareasFinalizadas(){
+      return this.tareas.filter(tarea => tarea.completed === true);
     }
   }
 }
