@@ -3,8 +3,6 @@
     <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">
       {{ tab }}
     </button>
-<!--    <p>{{actual}}</p>-->
-<!--    <component :is="tareasSeleccionadas" :tareas="tareas"></component>-->
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <addTarea @add-tarea="addTarea" />
   </div>
@@ -63,6 +61,8 @@ export default {
 
       if (this.actual === 'finalizadas'){
         return this.tareasFinalizadas;
+      }else if (this.actual === 'pendientes'){
+        return this.tareasPendientes;
       }
       return this.tareas;
     },
@@ -77,6 +77,9 @@ export default {
   computed:{
     tareasFinalizadas(){
       return this.tareas.filter(tarea => tarea.completed === true);
+    },
+    tareasPendientes(){
+      return this.tareas.filter(tarea => tarea.completed === false);
     }
   }
 }
