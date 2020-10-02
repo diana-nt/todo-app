@@ -1,10 +1,10 @@
 <template>
   <div class="home">
+      <addTarea @add-tarea="addTarea" />
     <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">
       {{ tab | capitalizar }}
     </button>
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
-    <addTarea @add-tarea="addTarea" />
     <button @click="ordenarTareas">Ordenar</button>
   </div>
 </template>
@@ -80,6 +80,7 @@ export default {
     },
     ordenarTareas(){
       return this.tareas.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+
     }
   },
   computed:{
