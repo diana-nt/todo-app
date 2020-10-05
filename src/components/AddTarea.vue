@@ -1,7 +1,7 @@
 <template>
   <div>
-      <input type="text" v-model="title" name="title">
-      <button @click="addTarea">Añadir</button>
+      <input type="text" v-model="title" name="title" placeholder="¿Qué tienes que hacer?">
+      <button @click="addTarea">+</button>
   </div>
 </template>
 
@@ -33,4 +33,36 @@ export default {
 </script>
 
 <style scoped>
+
+    div {
+        display: flex;
+        /*text-align: center;*/
+        margin-left: 32%;
+        padding-bottom: 20px;
+    }
+
+    input {
+        background: transparent;
+        border: solid 2px;
+        padding: 7px 10px;
+        border-right: none;
+        width: 40%;
+        color: black;
+        border-color: black;
+        font-size: 20px;
+    }
+
+
+    button {
+        border: solid 2px;
+        padding: 7px 10px;
+        background: paleturquoise;
+        cursor: pointer;
+        width: 10%;
+        color: black;
+        /*line-height: 1;*/
+        font-size: 22px;
+        font-weight: bold;
+    }
+
 </style>

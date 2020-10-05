@@ -24,7 +24,6 @@ export default {
         font-family: 'Oswald', sans-serif;
         text-align: center;
         padding-top: 50px;
-        padding-bottom: 50px;
         font-size: 60px;
         text-decoration: underline;
         text-decoration-color: paleturquoise;
