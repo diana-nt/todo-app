@@ -1,15 +1,23 @@
 <template>
   <div>
       <input type="text" v-model="title" name="title" placeholder="¿Qué tienes que hacer?">
-      <button @click="addTarea">+</button>
+      <button @click="addTarea"><font-awesome-icon icon="plus" /></button>
   </div>
 </template>
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faPlus)
 
 export default {
   name: "AddTarea.vue",
+    components: {
+      FontAwesomeIcon
+    },
   data() {
     return {
       title: ''

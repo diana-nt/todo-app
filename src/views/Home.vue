@@ -1,9 +1,16 @@
 <template>
   <div class="home">
       <addTarea @add-tarea="addTarea" />
-    <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">
-      {{ tab | capitalizar }}
-    </button>
+      <div class="sel">
+          <select id="ordenar-tareas">
+              <option selected>Tareas</option>
+              <option value="completadas">Completadas</option>
+              <option value="pendientes">Pendientes</option>
+          </select>
+      </div>
+<!--    <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">-->
+<!--      {{ tab | capitalizar }}-->
+<!--    </button>-->
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <button @click="ordenarTareas">Ordenar</button>
   </div>
@@ -14,11 +21,12 @@
 import Tareas from "@/components/Tareas";
 import AddTarea from "@/components/AddTarea";
 
+
 export default {
   name: 'Home',
   components: {
     Tareas,
-    AddTarea
+    AddTarea,
   },
   data() {
     return {
@@ -64,11 +72,11 @@ export default {
     },
     tareasMostradas(){
 
-      if (this.actual === 'finalizadas'){
-        return this.tareasFinalizadas;
-      }else if (this.actual === 'pendientes'){
-        return this.tareasPendientes;
-      }
+      // if (this.actual === 'finalizadas'){
+      //   return this.tareasFinalizadas;
+      // }else if (this.actual === 'pendientes'){
+      //   return this.tareasPendientes;
+      // }
       return this.tareas;
     },
     addTarea(nuevaTarea) {
@@ -99,7 +107,47 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    select {
+        /*appearance: none;*/
+        background-color: transparent;
+        border: none;
+        padding: 0 1em 0 0;
+        margin: 0;
+        max-width: 500px;
+        min-width: 10px;
+        width: auto;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: inherit;
+        line-height: inherit;
+        outline: none;
+    }
+
+    select:after {
+        content: '\f0d7';
+        font: normal normal normal 17px/1 FontAwesome;
+        color: #0ebeff;
+        right: 11px;
+        top: 6px;
+        height: 34px;
+        padding: 15px 0px 0px 8px;
+        border-left: 1px solid #0ebeff;
+        position: absolute;
+        pointer-events: none;
+    }
+
+
+    select::-ms-expand {
+        display: none;
+    }
 
 
 </style>
