@@ -64,6 +64,7 @@
         outline: none;
         height: 47px;
         line-height: 47px;
+        margin-left: 50px;
     }
 
     .custom-select .selected {
@@ -82,10 +83,10 @@
     }
 
     .custom-select .selected:after {
-        position: absolute;
+        position: relative;
         content: "";
-        top: 22px;
-        right: 1em;
+        top: 13px;
+        left: 5px;
         width: 0;
         height: 0;
         border: 5px solid transparent;

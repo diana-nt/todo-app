@@ -6,14 +6,12 @@
       default='Tareas'
       class="select"
       @input="changeTab"/>
-<!--      @input="alert(displayToKey($event))"/>-->
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <button @click="ordenarTareas">Ordenar</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Tareas from "@/components/Tareas";
 import AddTarea from "@/components/AddTarea";
 import CustomSelect from "@/components/CustomSelect";
@@ -27,7 +25,6 @@ export default {
   },
   data() {
     return {
-      //tabs: ['todas', 'finalizadas','pendientes' ],
       actual: 'tareas',
       tareas: [
         {
