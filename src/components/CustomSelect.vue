@@ -69,8 +69,6 @@
 
     .custom-select .selected {
         background-color: transparent;
-        /*border-radius: 6px;*/
-        /*border: 1px solid #666666;*/
         color: black;
         padding-left: 1em;
         cursor: pointer;
@@ -79,7 +77,6 @@
 
     .custom-select .selected.open {
         border: 1px solid black;
-        border-radius: 6px 6px 0px 0px;
     }
 
     .custom-select .selected:after {
@@ -95,7 +92,6 @@
 
     .custom-select .items {
         color: white;
-        border-radius: 0px 0px 6px 6px;
         overflow: hidden;
         border-right: 1px solid black;
         border-left: 1px solid black;
