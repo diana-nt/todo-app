@@ -2,10 +2,11 @@
   <div class="home">
       <addTarea @add-tarea="addTarea" />
       <custom-select
-      :options="['Tareas', 'Pendientes', 'Completadas']"
+      :options="['Tareas', 'Pendientes', 'Finalizadas']"
       default='Tareas'
       class="select"
-      @input="alert(displayToKey($event))"/>
+      @input="changeTab"/>
+<!--      @input="alert(displayToKey($event))"/>-->
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <button @click="ordenarTareas">Ordenar</button>
   </div>
@@ -26,8 +27,8 @@ export default {
   },
   data() {
     return {
-      tabs: ['todas', 'finalizadas','pendientes' ],
-      actual: 'todas',
+      //tabs: ['todas', 'finalizadas','pendientes' ],
+      actual: 'tareas',
       tareas: [
         {
           id: 1,
@@ -59,22 +60,23 @@ export default {
           completed: false,
           created_at: new Date('2004-08-13')
         }
-      ]
+      ],
+
     }
   },
   methods: {
     changeTab(tab){
-      this.actual = tab;
+      this.actual = tab.toLowerCase();
     },
-    tareasMostradas(){
+      tareasMostradas(){
+        if (this.actual === 'finalizadas'){
+            return this.tareasFinalizadas
+        }else if (this.actual === 'pendientes'){
+            return this.tareasPendientes
+        }
+          return this.tareas;
+      },
 
-      // if (this.actual === 'finalizadas'){
-      //   return this.tareasFinalizadas;
-      // }else if (this.actual === 'pendientes'){
-      //   return this.tareasPendientes;
-      // }
-      return this.tareas;
-    },
     addTarea(nuevaTarea) {
       console.log(nuevaTarea)
       this.tareas = [...this.tareas, nuevaTarea];
@@ -95,11 +97,6 @@ export default {
       return this.tareas.filter(tarea => tarea.completed === false);
     }
   },
-  filters: {
-    capitalizar(contenido) {
-      return contenido.substring(0, 1).toUpperCase() + contenido.substring(1, contenido.length);
-    }
-  }
 }
 </script>
 
