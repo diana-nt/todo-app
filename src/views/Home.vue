@@ -1,16 +1,11 @@
 <template>
   <div class="home">
       <addTarea @add-tarea="addTarea" />
-      <div class="sel">
-          <select id="ordenar-tareas">
-              <option selected>Tareas</option>
-              <option value="completadas">Completadas</option>
-              <option value="pendientes">Pendientes</option>
-          </select>
-      </div>
-<!--    <button v-for="tab in tabs" @click="changeTab(tab)" :key="tab">-->
-<!--      {{ tab | capitalizar }}-->
-<!--    </button>-->
+      <custom-select
+      :options="['Tareas', 'Pendientes', 'Completadas']"
+      default='Tareas'
+      class="select"
+      @input="alert(displayToKey($event))"/>
     <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
     <button @click="ordenarTareas">Ordenar</button>
   </div>
@@ -20,13 +15,14 @@
 // @ is an alias to /src
 import Tareas from "@/components/Tareas";
 import AddTarea from "@/components/AddTarea";
-
+import CustomSelect from "@/components/CustomSelect";
 
 export default {
   name: 'Home',
   components: {
     Tareas,
     AddTarea,
+      CustomSelect
   },
   data() {
     return {
@@ -107,47 +103,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-
-    select {
-        /*appearance: none;*/
-        background-color: transparent;
-        border: none;
-        padding: 0 1em 0 0;
-        margin: 0;
-        max-width: 500px;
-        min-width: 10px;
-        width: auto;
-        font-family: inherit;
-        font-size: inherit;
-        cursor: inherit;
-        line-height: inherit;
-        outline: none;
-    }
-
-    select:after {
-        content: '\f0d7';
-        font: normal normal normal 17px/1 FontAwesome;
-        color: #0ebeff;
-        right: 11px;
-        top: 6px;
-        height: 34px;
-        padding: 15px 0px 0px 8px;
-        border-left: 1px solid #0ebeff;
-        position: absolute;
-        pointer-events: none;
-    }
-
-
-    select::-ms-expand {
-        display: none;
-    }
-
+<style>
 
 </style>

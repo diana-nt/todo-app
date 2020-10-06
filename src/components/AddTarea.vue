@@ -68,9 +68,9 @@ export default {
         cursor: pointer;
         width: 10%;
         color: black;
-        /*line-height: 1;*/
         font-size: 22px;
-        font-weight: bold;
+        text-align: center;
+        vertical-align: center;
     }
 
 </style>
