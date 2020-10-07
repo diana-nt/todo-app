@@ -1,6 +1,5 @@
 <template>
   <div>
-<!--    <h2>Tareas que hacer</h2>-->
     <ul>
       <li v-bind:key="tarea.id" v-for="tarea in tareas">
         <Tarea v-bind:tarea="tarea" @delete-tarea="$emit('delete-tarea', tarea.id)"/>
@@ -24,4 +23,13 @@ export default {
 </script>
 
 <style scoped>
+
+    li {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+
+    ul{
+        margin-left: 40px;
+    }
 </style>
