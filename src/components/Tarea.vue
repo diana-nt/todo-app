@@ -7,13 +7,22 @@
             <input type="checkbox" @input="completar">{{ tarea.title }}
             <span class="checkmark"></span>
         </label>
-    <button @click="$emit('delete-tarea', tarea.id)">Eliminar</button>
+    <button @click="$emit('delete-tarea', tarea.id)"><font-awesome-icon icon="times" class="iconPosition"/></button>
   </div>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
+library.add(faTimes);
+
 export default {
   name: 'Tarea',
+    components: {
+        FontAwesomeIcon
+    },
   props: [
       "tarea"
   ],
@@ -33,7 +42,22 @@ export default {
 
   button{
       margin-left: 20px;
+      border-radius: 0;
+      height: 20px;
+      width: 20px;
+      background-color: paleturquoise;
   }
+
+  /*font-awesome-icon {*/
+  /*    position: relative;*/
+  /*    right: 5px;*/
+  /*}*/
+
+  .iconPosition {
+      position: relative;
+      right: 2.5px;
+  }
+
 
   .container {
       display: inline-block;
