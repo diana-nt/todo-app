@@ -2,7 +2,10 @@
   <div>
     <ul>
       <li v-bind:key="tarea.id" v-for="tarea in tareas">
-        <Tarea v-bind:tarea="tarea" @delete-tarea="$emit('delete-tarea', tarea.id)"/>
+        <Tarea
+            :tarea="tarea"
+           @completar-tarea="$emit('completar-tarea', tarea.id)"
+           @delete-tarea="$emit('delete-tarea', tarea.id)"/>
       </li>
     </ul>
   </div>

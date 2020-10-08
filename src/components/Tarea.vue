@@ -1,11 +1,10 @@
 <template>
-<!--  <div v-bind:class="{ 'completed': tarea.completed }">-->
     <div>
-<!--      <p @click="markComplete">{{ tarea.title }}</p>-->
-
         <label class="container">
-            <input type="checkbox" @input="completar">{{ tarea.title }}
+            <input type="checkbox" @input="$emit('completar-tarea', tarea.id)">
+            <span :class="{ 'completed': tarea.completed }">{{ tarea.title }}</span>
             <span class="checkmark"></span>
+<!--            <span :class="{ 'checkmark': tarea.completed }"/>-->
         </label>
     <button @click="$emit('delete-tarea', tarea.id)"><font-awesome-icon icon="times" class="iconPosition"/></button>
   </div>
@@ -26,32 +25,29 @@ export default {
   props: [
       "tarea"
   ],
-  methods: {
-    completar(){
-      this.tarea.completed = !this.tarea.completed
-    }
-  }
 }
 </script>
 
 <style scoped>
 
-  /*.completed {*/
-  /*  text-decoration: line-through;*/
-  /*}*/
+  .completed {
+      background: linear-gradient(to right, rgba(175, 238, 238, 0.5), rgb(175, 238, 238), rgba(175, 238, 238, 0.5));
+      content: "";
+      height: 0.125em;
+      left: 0;
+      margin-top: calc(0.125em / 2 * -1);
+      right: 0;
+      top: 50%;
+  }
 
   button{
       margin-left: 20px;
       border-radius: 0;
       height: 20px;
       width: 20px;
-      background-color: paleturquoise;
+      background-color: #afeeee;
+      cursor: pointer;
   }
-
-  /*font-awesome-icon {*/
-  /*    position: relative;*/
-  /*    right: 5px;*/
-  /*}*/
 
   .iconPosition {
       position: relative;
@@ -86,17 +82,12 @@ export default {
       left: 0;
       height: 18px;
       width: 18px;
-      /*background-color: azure;*/
       border: 1px solid black;
   }
 
   .container:hover input ~ .checkmark {
       background-color: paleturquoise;
   }
-
-  /*.container input:checked ~ .checkmark {*/
-  /*    background-color: azure;*/
-  /*}*/
 
   .checkmark:after {
       content: "";

@@ -1,12 +1,18 @@
 <template>
   <div class="home">
       <addTarea @add-tarea="addTarea" />
+
       <custom-select
       :options="['Tareas', 'Pendientes', 'Finalizadas']"
       default='Tareas'
       class="select"
       @input="changeTab"/>
-    <tareas :tareas="tareasMostradas()" @delete-tarea="deleteTarea"></tareas>
+
+    <tareas
+        :tareas="tareasMostradas()"
+        @completar-tarea="completarTarea"
+        @delete-tarea="deleteTarea"></tareas>
+
     <button @click="ordenarTareas">Ordenar</button>
   </div>
 </template>
@@ -75,7 +81,6 @@ export default {
       },
 
     addTarea(nuevaTarea) {
-      console.log(nuevaTarea)
       this.tareas = [...this.tareas, nuevaTarea];
     },
     deleteTarea(tareaId){
@@ -83,7 +88,10 @@ export default {
     },
     ordenarTareas(){
       return this.tareas.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-
+    },
+      completarTarea(tareaId){
+          let t = this.tareas.find(tarea => tarea.id === tareaId);
+          t.completed = !t.completed;
     }
   },
   computed:{
@@ -98,5 +106,15 @@ export default {
 </script>
 
 <style>
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    /*background-color: azure;*/
+    border: 1px solid black;
+}
 
 </style>
