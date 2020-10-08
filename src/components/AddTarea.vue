@@ -1,6 +1,6 @@
 <template>
   <div>
-      <input type="text" v-model="title" name="title" placeholder="¿Qué tienes que hacer?">
+      <input type="text" v-model="title" name="title" placeholder="¿Qué tienes que hacer?" @keyup.enter="addTarea" v-focus>
       <button @click="addTarea"><font-awesome-icon icon="plus" /></button>
   </div>
 </template>
@@ -36,7 +36,14 @@ export default {
       this.$emit('add-tarea', nuevaTarea);
       this.title = '';
     }
-  }
+  },
+    directives: {
+      focus: {
+          inserted: function (el) {
+              el.focus()
+          }
+      }
+    }
 }
 </script>
 
