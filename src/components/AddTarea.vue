@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import repo from "@/services/tasks.service";
+
 
 library.add(faPlus)
 
@@ -30,9 +32,10 @@ export default {
         id: uuidv4(),
         title: this.title,
         completed: false,
-        created_at: new Date()
+        created_on: new Date()
       }
 
+      repo.addTask(nuevaTarea);
       this.$emit('add-tarea', nuevaTarea);
       this.title = '';
     }
