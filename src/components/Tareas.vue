@@ -4,8 +4,8 @@
       <li v-bind:key="tarea.id" v-for="tarea in tareas">
         <Tarea
             :tarea="tarea"
-           @completar-tarea="$emit('completar-tarea', tarea.id)"
-           @delete-tarea="$emit('delete-tarea', tarea.id)"/>
+           @completar-tarea="completarTarea"
+           @delete-tarea="deleteTask(tarea)"/>
       </li>
     </ul>
   </div>
@@ -21,7 +21,16 @@ export default {
   },
   props: [
       "tareas"
-  ]
+  ],
+    methods:{
+      deleteTask(task){
+          console.log(task, task._id)
+          this.$emit('delete-tarea', task._id)
+      },
+        completarTarea(tarea){
+            this.$emit('completar-tarea', tarea._id)
+        }
+    }
 }
 </script>
 

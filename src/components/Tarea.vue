@@ -1,7 +1,7 @@
 <template>
     <div>
         <label class="container">
-            <input type="checkbox" v-model="tarea.completed" @input="$emit('completar-tarea', tarea.id)">
+            <input type="checkbox" v-model="tarea.completed" @input="$emit('completar-tarea', tarea)">
             <span :class="{ 'completed': tarea.completed }">{{ tarea.title }}</span>
             <span class="checkmark"></span>
         </label>

@@ -1,17 +1,17 @@
 <template>
   <div>
-      <input type="text" v-model="title" name="title" placeholder="¿Qué tienes que hacer?" @keyup.enter="addTarea" v-focus>
-      <button @click="addTarea"><font-awesome-icon icon="plus" /></button>
+      <input type="text" v-model="task.title" name="title" placeholder="¿Qué tienes que hacer?" @keyup.enter="saveTask()" v-focus>
+      <button @click="saveTask(); newTask();"><font-awesome-icon icon="plus" /></button>
   </div>
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import repo from "@/services/tasks.service";
-
+// import repo from "@/services/tasks.service";
+import http from "../http-common";
 
 library.add(faPlus)
 
@@ -22,23 +22,51 @@ export default {
     },
   data() {
     return {
-      title: ''
+        task: {
+            id: 0,
+            title: '',
+            completed: false,
+            created_at: new Date()
+        }
     }
   },
   methods: {
-    addTarea(){
+   /* addTarea(){
 
       const nuevaTarea = {
-        id: uuidv4(),
-        title: this.title,
-        completed: false,
-        created_on: new Date()
+        //id: uuidv4(),
+        title: this.task.title,
+        //completed: false,
+        //created_at: new Date()
       }
 
-      repo.addTask(nuevaTarea);
-      this.$emit('add-tarea', nuevaTarea);
-      this.title = '';
-    }
+      //repo.addTask(nuevaTarea);
+        console.log(nuevaTarea)
+      //this.$emit('add-tarea', nuevaTarea);
+      this.task.title = '';
+    },*/
+
+      saveTask() {
+        let data = {
+            title: this.task.title
+        };
+          console.log(data)
+
+        http
+          .post("/task", data)
+          .then(response => {
+              // this.task.id = response.data.id;
+              this.$emit('add-tarea', response.data);
+              console.log(response)
+              this.task.title = '';
+          })
+          .catch(e => {
+              console.log(e);
+          })
+      },
+      newTask(){
+        this.task = {};
+      }
   },
     directives: {
       focus: {
